@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import "./App.css";
 
+type DirectionType = 1 | -1;
+
 function App() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -21,7 +23,7 @@ function App() {
 
     if (!ctx) return;
 
-    let animationFrameId: unknown;
+    let animationFrameId: number;
 
     const animate = () => {
       // Clear the canvas
@@ -55,7 +57,7 @@ function App() {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    const move = (direction) => {
+    const move = (direction: DirectionType) => {
       // Вычисляем вектор движения на основе текущего угла
       const dx = Math.cos(ship.angle) * direction * ship.moveSpeed;
       const dy = Math.sin(ship.angle) * direction * ship.moveSpeed;
